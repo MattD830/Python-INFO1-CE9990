@@ -5,8 +5,8 @@ I came up with this the first try.  So, that's why this is posted in duplicate.
 import sys
 
 try:
-	rows = int(input("How many rows? "))
-	columns = int(input("How many columns? "))
+	rows = int(input("How many columns? "))
+	columns = int(input("How many rows? "))
 	tall = int(input("How tall should the boxes be? "))
 	wide = int(input("How wide should the boxes be? "))
 except Exception as e:
