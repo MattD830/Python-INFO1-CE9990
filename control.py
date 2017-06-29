@@ -19,15 +19,15 @@ stock = input("What stock are you going to buy? ")
 spam = d(stock)
 
 i = 1
-x = []
+eggs = []
 while i < 11:
-	x.append(float(spam[i].decode('utf-8').replace('\n','').split(',')[4]))
+	eggs.append(float(spam[i].decode('utf-8').replace('\n','').split(',')[4]))
 	i += 1
 
-if sum(x)/10 >= 5:
+if sum(eggs)/10 >= 5:
 	print("Your stock is not a penny stock")
 	sys.exit(0)
-elif sum(x)/10 < 5:
+elif sum(eggs)/10 < 5:
 	print("Your stock is a penny stock, it's best not to invest")
 	sys.exit(0)
 else:
