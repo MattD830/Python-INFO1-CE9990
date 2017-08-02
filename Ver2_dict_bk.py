@@ -27,7 +27,7 @@ def button():
 
 r = tk.Tk()
 r.title("Cumulative Probability of Default by State")
-r.geometry("42x80")
+r.geometry("420x80")
 
 sml =tk.Label(r, text='Select a State:')
 sml.grid(row=0, column=0)
