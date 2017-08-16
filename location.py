@@ -1,3 +1,7 @@
+"""
+This program scrapes latitude and longitude from the web and returns information about it
+"""
+
 import json
 import urllib.request as ur
 
@@ -11,6 +15,9 @@ class Location(object):
 		self.lng = self.setLongitude(lng)
 		
 	def __repr__(self):
+		"""
+		Returns basic information
+		"""
 		if self.lat >= 0:
 			if self.lng >= 0:
 				return self.getaddress()+' ('+self.north()+', '+self.east()+')'
@@ -23,6 +30,9 @@ class Location(object):
 				return self.getaddress()+' ('+self.south()+', '+self.west()+')'
 		
 	def getZipcode(self):
+		"""
+		Returns the zip code
+		"""
 		self.mapf = self.getmap()
 		if self.mapf['status'] == 'OK':
 			for i in range(len(self.mapf['results'][0]['address_components'])):
@@ -34,11 +44,17 @@ class Location(object):
 		return self.zip
 		
 	def getmap(self):
+		"""
+		Scrapes the required data from the web
+		"""
 		self.url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng={},{}'.format(self.lat,self.lng)
 		self.mapf = json.loads(ur.urlopen(self.url).read())
 		return self.mapf
 		
 	def getaddress(self):
+		"""
+		Returns the address of the specified location
+		"""
 		self.mapf = self.getmap()
 		if self.mapf['status'] == 'OK':
 			self.address = self.mapf['results'][0]['formatted_address']
@@ -49,28 +65,55 @@ class Location(object):
 		return self.address
 		
 	def north(self):
+		"""
+		Appends directional notion
+		"""
 		return str(self.lat)+'°N'
 	def south(self):
+                """
+                Appends directional notion
+                """
 		return str(self.lat)+'°S'
 		
 	def east(self):
+                """
+                Appends directional notion
+                """
 		return str(self.lng)+'°E'
 	def west(self):
+                """
+                Appends directional notion
+                """
 		return str(self.lng)+'°W'
 		
 	def getLatitude(self):
+		"""
+		Returns the latitude of the object
+		"""
 		return self.lat
 	def getLongitude(self):
+		"""
+		Returns the longitude of the object
+		"""
 		return self.lng
 		
 	def setLatitude(self,lat):
+		"""
+		Converts the input into the latitude object
+		"""
 		self.lat = lat
 		return self.lat
 	def setLongitude(self,lng):
+		"""
+		Converts the input into the longitude object
+		"""
 		self.lng = lng
 		return self.lng
 	
 	def setmap(self):
+		"""
+		This does nothing
+		"""
 		None
 
 if __name__ == "__main__":
