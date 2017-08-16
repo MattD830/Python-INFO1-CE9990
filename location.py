@@ -20,14 +20,14 @@ class Location(object):
 		"""
 		if self.lat >= 0:
 			if self.lng >= 0:
-				return self.getaddress()+' ('+self.north()+', '+self.east()+')'
+				return ('+self.north()+', '+self.east()+')'
 			else:
-				return self.getaddress()+' ('+self.north()+', '+self.west()+')'
+				return ('+self.north()+', '+self.west()+')'
 		else:
 			if self.lng >= 0:
-				return self.getaddress()+' ('+self.south()+', '+self.east()+')'
+				return ('+self.south()+', '+self.east()+')'
 			else:
-				return self.getaddress()+' ('+self.south()+', '+self.west()+')'
+				return ('+self.south()+', '+self.west()+')'
 		
 	def getZipcode(self):
 		"""
@@ -50,19 +50,6 @@ class Location(object):
 		self.url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng={},{}'.format(self.lat,self.lng)
 		self.mapf = json.loads(ur.urlopen(self.url).read())
 		return self.mapf
-		
-	def getaddress(self):
-		"""
-		Returns the address of the specified location
-		"""
-		self.mapf = self.getmap()
-		if self.mapf['status'] == 'OK':
-			self.address = self.mapf['results'][0]['formatted_address']
-		elif self.lat == 90:
-			self.address = 'The North Pole'
-		else:
-			self.address = ''
-		return self.address
 		
 	def north(self):
 		"""
@@ -118,7 +105,6 @@ class Location(object):
 
 if __name__ == "__main__":
 	loc = Location(48.858222, 2.2945)
-	print(loc.getaddress())
+	print(loc)
 	loc.setLatitude(-90)
 	print(loc.getLatitude())
-	print(loc.getaddress())
